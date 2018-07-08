@@ -1,0 +1,67 @@
+body {
+    background-color: #F4F4F4;
+    font: 14px Tahoma, sans-serif;
+    text-align: center;
+    background-image: none;
+}
+
+.navbar-default {
+    vertical-align: middle;
+    background-color: #FFFFFF;
+    border: none;
+}
+
+.link-to-other-pages {
+    float: right;
+    margin-top: 2.5%;
+}
+
+.profile-page {
+    margin-top: 7.5%;
+    text-align: center;
+}
+
+@media only screen and (max-width: 450px) {
+    .profile-page {
+        margin-top: 20%;
+        text-align: center;
+    }
+}
+
+.username-in-panel {
+    color: #000000;
+    font: 24px Tahoma, sans-serif;
+    text-align: center;
+}
+
+.date-in-panel {
+    text-align: left;
+    margin-left: 5%;
+    margin-top:0%;
+    margin-bottom: 0%;
+    font: 12px Tahoma, sans-serif;
+}
+
+.view-comments-panel {
+    background-color: #F4F4F4;
+}
+
+.following-panel {
+    color: #000000;
+    font: 24px Tahoma, sans-serif;
+}
+
+.following-person-in-panel {
+    color: #0077B5;
+    font: 16px Tahoma, sans-serif;
+}
+
+.following-number-in-panel {
+    color: #000000;
+    font: 16px Tahoma, sans-serif;
+}
+
+.error {
+    color: #FF0000;
+}
+

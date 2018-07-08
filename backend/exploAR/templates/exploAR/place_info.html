@@ -1,0 +1,272 @@
+{% extends "exploAR/base.html" %}
+
+{% load staticfiles %}
+
+{% block login-heading-info %}
+	<div class="header-icon"><a href="{% url 'home' %}">exploAR</a></div>
+{% endblock %}
+
+{% block styles %}
+	<link rel="stylesheet" href="{% static 'exploAR/place_info.css' %}">
+{% endblock %}
+
+{% block content %}
+	<div class="container-fluid">
+ 		<div class="row">
+			<div class="col-xs-12 col-md-6 col-md-offset-3">
+				<div class="registration-panel">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<div class="row">
+								<p>{{google.0.name}}</p>
+								<br>
+								<img src="{{ google.0.photo.url}}" height="150" width="250">
+								<div class="row">
+									<div class="col-xs-10 col-xs-offset-1">
+										<form id="post-create-form" action="{% url 'home' %}" method="post">
+											{% csrf_token %}
+											<hr>
+
+											<div class="form-group">
+												<div class="row">
+													<input type="submit" name="post-submit" id="post-submit" tabindex="3" class="btn btn-primary" value="View in AR">
+												</div>
+											</div>
+											<input type="hidden" value={{google.0.google_place_id}} name="place-id" id="place-id"> 
+										</form>
+									</div>
+								</div>
+								
+								<div class="row">
+									<div class="col-xs-10 col-xs-offset-1">
+									
+										<div class="form-group">
+											<div class="row">
+												<p>Google Rating: {{google.0.google_rating}} stars</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xs-10 col-xs-offset-1">
+									
+										<div class="form-group">
+											<div class="row">
+												<p>Address: {{google.0.address}} </p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xs-10 col-xs-offset-1">
+									
+										<div class="form-group">
+											<div class="row">
+												{% if google.0.website == "No Website available" %}
+													<p>Website: {{google.0.website}}</p>
+												{% else %}
+													<p>Website: <a href="{{google.0.website}}"> {{google.0.website}} </a></p>
+												{% endif %}
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xs-10 col-xs-offset-1">
+									
+										<div class="form-group">
+											<div class="row">
+												{% if google.0.phone_number == "No Phone Number available" %}
+													<p>Phone Number: {{google.0.phone_number}} </p>
+												{% else %}
+													<p>Phone Number: <a href="tel:{{google.0.phone_number}}"> {{google.0.phone_number}} </a></p>
+												{% endif %}
+											</div>
+										</div>
+									</div>
+								</div>								
+								<div class="row">
+									<div class="col-xs-10 col-xs-offset-1">
+									
+										<div class="form-group">
+											<div class="row">
+												<p>Open Now: {{google.0.open_now}} </p>
+											</div>
+										</div>
+									</div>
+								</div>	
+								<div class="row">
+									<div class="col-xs-10 col-xs-offset-1">
+										<div class="row">
+											<p class="following-panel">Opening Hours</p>
+										</div>
+										<div class="form-group">
+											<div class="row">
+												<p>Sunday: {{google.0.open_hours.0}} </p>
+											</div>
+											<div class="row">
+												<p>Monday: {{google.0.open_hours.1}} </p>
+											</div>
+											<div class="row">
+												<p>Tuesday: {{google.0.open_hours.2}} </p>
+											</div>
+											<div class="row">
+												<p>Wednesday: {{google.0.open_hours.3}} </p>
+											</div>
+											<div class="row">
+												<p>Thursday: {{google.0.open_hours.4}} </p>
+											</div>
+											<div class="row">
+												<p>Friday: {{google.0.open_hours.5}} </p>
+											</div>
+											<div class="row">
+												<p>Saturday: {{google.0.open_hours.6}} </p>
+											</div>
+										</div>
+									</div>
+								</div>								
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="container-fluid">
+ 		<div class="row">
+			<div class="col-xs-12 col-md-6 col-md-offset-3">
+				
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<div class="row">
+							<p>Reviews</p>
+							<div class="row">
+								<div class="col-xs-10 col-xs-offset-1">
+									<form id="post-create-form" action="{% url 'createReview' %}" method="post">
+										{% csrf_token %}
+
+										<div class="form-group">
+											<input type="text" name="review_text" required id="id_review" tabindex="1" class="form-control" placeholder="Add a review">
+										</div>
+
+										<div class="form-group">
+											<div class="row">
+												<input type="submit" name="review-submit" id="review-submit" tabindex="3" class="btn btn-primary" value="Submit">
+											</div>
+										</div>
+										<input type="hidden" value={{google.0.google_place_id}} name="place-id" id="place-id"> 
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+
+	<div class="posts" id="posts">
+	{% for r in reviews %}
+	<div class="onePost" id = "{{r.pk}}">
+		<div class="container-fluid">
+	 		<div class="row">
+				<div class="col-xs-12 col-md-6 col-md-offset-3">
+					<div class="create-post-panel">
+						<div class="panel panel-default">
+
+							<div class="panel-heading">
+								<div class="row">
+									<div class="col-xs-12">
+										
+											<div class="form-group">
+												<div class="row">
+													<p class="username-in-panel"><a href="{% url 'profilePage' r.reviewer.username%}">{{r.reviewer.first_name}} {{r.reviewer.last_name}}</a></p>
+												</div>
+											</div>
+											<div class="form-group">
+												<div class="row">
+													<p class="date-in-panel">{{r.created_at}}</p>
+												</div>
+											</div>
+											<div class="form-group">
+												<div class="row">
+													<p class="post-info-in-panel">{{r.review_text}}</p>
+												</div>
+											</div>
+											
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>		
+	{% endfor %}
+	</div>
+
+	<div class="container-fluid">
+ 		<div class="row">
+			<div class="col-xs-12 col-md-6 col-md-offset-3">
+				
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<div class="row">
+							<p>Google Reviews</p>
+							<hr>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="posts" id="posts">
+	{% for r in google_reviews %}
+	<div class="onePost" id = "{{r.pk}}">
+		<div class="container-fluid">
+	 		<div class="row">
+				<div class="col-xs-12 col-md-6 col-md-offset-3">
+					<div class="create-post-panel">
+						<div class="panel panel-default">
+
+							<div class="panel-heading">
+								<div class="row">
+									<div class="col-xs-12">
+										
+											<div class="form-group">
+												<div class="row">
+													<p class="username-in-panel">{{r.reviewer_name}}</p>
+												</div>
+											</div>
+											<div class="form-group">
+												<div class="row">
+													<p class="date-in-panel">{{r.review_time}}</p>
+												</div>
+											</div>
+											<div class="form-group">
+												<div class="row">
+													<p class="post-info-in-panel">{{r.review_text}}</p>
+												</div>
+											</div>
+											
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>		
+	{% endfor %}
+	</div>
+
+{% endblock %}

@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+	<head>
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	    {% load staticfiles %}
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<link href="{% static 'exploAR/base.css' %}" rel="stylesheet" type="text/css">
+		<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+		{% block styles %}
+		{% endblock %}	
+		<title> {% block title %} exploAR {% endblock %} </title>
+	</head>
+
+	<body>
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="masthead-theme container-fluid">
+				{% block login-heading-info %}
+				{% endblock %}
+				<div class="col-md-4">
+					{% block heading-info %}
+					{% endblock %}
+				</div>
+				<div class="col-md-8">
+					{% block link-to-other-pages %}
+					{% endblock %}
+				</div>
+
+			</div>
+		</nav>
+
+	    <div class="search-bar">
+			{% block search-bar %}
+			{% endblock %}
+		</div>
+
+	    {% if message %}
+	        <div class="message">
+	            {{message}}
+	        </div>
+	    {% endif %}
+
+	    <div class="content">
+		    {% block content %}
+		    {% endblock %}
+		</div>
+
+	</body>
+</html>

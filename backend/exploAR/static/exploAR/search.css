@@ -1,0 +1,23 @@
+body {
+    background-color: #F8F8F8;
+    background-image: '';
+    min-height : 100%;
+    min-width : 100%;
+    background-size: cover;
+    font: 14px Tahoma, sans-serif;
+    text-align: center;
+}
+
+.searchbox {
+    margin-top: 30%;
+}
+
+@media only screen and (max-width: 400px) {
+    .searchbox {
+        margin-top:35%;
+        margin-bottom:25%;
+    }
+}
+
+
+

@@ -1,0 +1,20 @@
+*.log
+*.pot
+*.pyc
+*.ini
+*.pem
+local_settings.py
+
+# Editor backup files
+*~
+*#
+*.swp
+
+# Mac OS data store file
+.DS_Store
+
+# Django's SQL Lite Database File
+db.sqlite3
+
+**/backend/exploAR/resources
+/backend/exploAR/migrations/

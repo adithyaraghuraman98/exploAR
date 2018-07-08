@@ -1,0 +1,131 @@
+<!--
+/*
+ * Copyright 2017 Google Inc. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <title>exploAR</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no,
+  minimum-scale=1.0, maximum-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="{% static 'exploAR/exploar.css' %}">
+
+</head>
+<body>
+
+<div id="myDropdown" class="dropdown-content">
+  <table id="drop-table">
+  <tr>
+    <td>
+      <a href="javascript:setPlaceType('restaurant')">
+        <i id="restaurant" class="material-icons">local_dining</i>
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="javascript:setPlaceType('cafe')">
+        <i id="cafe" class="material-icons">local_cafe</i>
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="javascript:setPlaceType('bar')">
+        <i id="bar" class="material-icons">local_bar</i>
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="javascript:setPlaceType('shopping_mall')">
+        <i id="shopping_mall" class="material-icons">local_mall</i>
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="javascript:setPlaceType('atm')">
+        <i id="atm" class="material-icons">local_atm</i>
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="javascript:setPlaceType('lodging')">
+        <i id="lodging" class="material-icons">hotel</i>
+      </a>
+    </td>
+  </tr>
+  </table>
+</div>
+
+<table id="info">
+  <tr>
+    <td>
+      <a href="javascript:hamburger();">
+        <i id="dropbtn" class="material-icons">menu</i>
+      </a>
+    </td>
+    <td>
+    <td>
+      <a href="{% url 'scouts' %}">
+        <i class="material-icons">place</i>
+      </a>
+    </td>
+    <td>
+      {% if user.username %}
+      <a href="{% url 'profilePage' user.username %}">
+        <i class="material-icons">account_circle</i>
+      </a>
+      {% else %}
+      <a href="{% url 'login' %}">
+        <i class="material-icons">account_circle</i>
+      </a>
+      {% endif %}
+    </td>
+    <td>
+      <a href="javascript:recalibrate();">
+        <i class="material-icons">autorenew</i>
+      </a>
+    </td>
+    <td>
+      <a href="{% url 'search' %}">
+        <i class="material-icons">search</i>
+      </a>
+    </td>
+  </tr>
+</table>
+
+
+{% if placeID %}
+  <input type="hidden" value={{placeID}} name="place-id" id="place-id">
+{% else %}
+  <input type="hidden" value="" name="place-id" id="place-id">
+{% endif %}
+
+<script src="{% static 'exploAR/three.js' %}"></script>
+<script src="{% static 'exploAR/VRControls.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/three.ar.js@latest/dist/three.ar.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+<script src="{% static 'exploAR/three-text2d.js' %}"></script>
+<script src="{% static 'exploAR/exploar.js' %}"></script>
+<script src="{% static 'exploAR/dropdown.js' %}"></script>
+
+</body>
+</html>

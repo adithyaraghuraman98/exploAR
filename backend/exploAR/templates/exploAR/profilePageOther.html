@@ -1,0 +1,98 @@
+{% extends "exploAR/base.html" %}
+
+{% load staticfiles %}
+
+{% block styles %}
+	<link rel="stylesheet" href="{% static 'exploAR/profilePage.css' %}">
+{% endblock %}
+
+{% block heading-info %}
+	
+	<div class="header-icon"><a href="{% url 'home' %}">exploAR</a></div>
+
+{% endblock %}
+
+{% block link-to-other-pages %}
+	
+	<div class="link-to-other-pages">
+		{{user.first_name}} {{user.last_name}}
+		<a href="{% url 'logout' %}">Logout</a>
+    </div>
+
+{% endblock %}
+
+{% block content %}
+	<div class="container-fluid">
+		<div class="row">
+			<p class="profile-page"> <b>User Profile</b> </p>
+		</div>
+	</div>
+	<div class="container-fluid">
+ 		<div class="row">
+			<div class="col-xs-12 col-md-6 col-md-offset-3">
+				<div class="create-post-panel">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-xs-12">
+									
+									<div class="form-group">
+										<div class="row">
+											<p class="username-in-panel"><a href="{% url 'profilePage' profile.user.username %}">{{profile.user.first_name}} {{profile.user.last_name}}</a></p>
+										</div>
+
+										<div class="row">
+											<p class="username-in-panel">{{profile.user.username}}</p>
+										</div>
+									</div>
+
+									<br>
+									{% if followingUser %}
+									<form id="unfollow-form" action="{% url 'removeScout' profile.user.id %}" method="post">
+										{% csrf_token %}
+										
+										<div class="form-group">
+											<input type="submit" name="follow-person" id="follow-person" tabindex="2" class="btn btn-success" value="Is Scout">
+										</div>
+									</form>
+									{% else %}
+									<form id="follow-form" action="{% url 'addScout' profile.user.id %}" method="post">
+										{% csrf_token %}
+										
+										<div class="form-group">
+											<input type="submit" name="follow-person" id="follow-person" tabindex="2" class="btn btn-primary" value="Scout">
+										</div>
+									</form>
+									{% endif %}
+									
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-xs-12">
+									
+									<div class="form-group">
+										<div class="row">
+											<p class="following-panel">Scouts</p>
+										</div>
+										<div class="row">
+											{% if followingCount == 1 %}
+											<p class="following-number-in-panel">This person has {{followingCount}} scout</p>
+											{% else %}
+											<p class="following-number-in-panel">This person has {{followingCount}} scouts</p>
+											{% endif %}
+										</div>
+										{% for newUser in following %}
+										<p class="following-person-in-panel"><a href="{% url 'profilePage' newUser.user.username %}">{{newUser.user.first_name}} {{newUser.user.last_name}} </a></p>
+										{% endfor %}
+									</div>
+								</div>
+							</div>							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>		
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "exploAR/base.html" %}
+
+{% load staticfiles %}
+
+{% block login-heading-info %}
+	<div class="header-icon"><a href="{% url 'home' %}">exploAR</a></div>
+{% endblock %}
+
+{% block styles %}
+	<link rel="stylesheet" href="{% static 'exploAR/search.css' %}">
+{% endblock %}
+
+{% block content %}
+	<div class="container-fluid">
+ 		<div class="row">
+			<div class="col-xs-10 col-xs-offset-1 col-md-4 col-md-offset-4">
+				<div class="registration-panel">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<div class="row">
+								<a href="">Explore with exploAR</a>
+							</div>
+						</div>
+
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-xs-12">
+									<form id="search-form" action="{% url 'searchScouts' %}" method="post">
+										{% csrf_token %}
+										<div class="searchbox" id="locationField">
+											<div class="form-group">
+									    		<input name="search-string" id="search-string" placeholder="Scout your scout" type="text" />
+									    	</div>
+									    	<div class="form-group">
+												<div class="row">
+													<input type="submit" name="search-submit" id="search-submit" tabindex="7" class="btn btn-primary" value="Scout">
+												</div>
+											</div>
+									  	</div>
+									  	<input type="hidden" value="" name="place-id" id="place-id"> 
+								  	</form>
+								</div>
+							</div>
+						</div>
+
+						{% if numMatches != 0 %}
+							<p> {{numMatches}} Search Result(s) found </p>
+						{% endif %}
+						{% for newUser in matches %}
+							<p class="following-person-in-panel"><a href="{% url 'profilePage' newUser.user.username %}">{{newUser.user.first_name}} {{newUser.user.last_name}} </a></p>
+						{% endfor %}
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
